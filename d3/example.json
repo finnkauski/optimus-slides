@@ -1,0 +1,31 @@
+{
+   "name": "All trade",
+   "children": [
+      {"name": "Food",
+       "children":[
+         {"name":"Frozen pzza", "size":3000},
+         {"name":"Pck pizza dinner","size":500},
+         {"name":"Vegetables",
+          "children":[
+            {"name":"brocolli","size":300},
+            {"name":"potato",
+              "children":[
+                {"name":"potato crisps", "size":2000},
+                {"name":"patatoes", "size":202},
+                {"name":"potatoes", "size":3400}
+              ]}
+          ]
+         }
+       ]
+      },
+      {"name": "Cars",
+       "children":[
+         {"name":"X5", "size":5000},
+         {"name":"bmw","size":2034},
+         {"name":"volvo","size":12034}
+       ]
+      },
+      {"name": "Packaging", "size": 6714},
+      {"name": "Chemicals", "size": 743}
+     ]
+}

@@ -1,0 +1,384 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>o p t i m u s</title>
+
+		<!-- Include CSS stylesheets (including bootstrap) -->
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> -->
+		<link rel="stylesheet" href="css/theme/roboto.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Font -->
+		<link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+
+
+		<style media="screen">
+			sub {
+				font-size: 0.6em !important;
+			}
+		</style>
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<div id="typed-strings">
+						<p>Bumblebee</p>
+						<p>Megatron</p>
+						<p>Grimlock</p>
+						<p>Starscream</p>
+						<p>Hotrod</p>
+						<p>Unicron</p>
+						<p>Prowl</p>
+						<p>Optimus</p>
+					</div>
+					<h3><span id="typed"></span></h3>
+					<div>
+						<p>Arturas Eidukas, Data Science Campus</p>
+						<p><a href="mailto:arturas.eidukas@ons.gov.uk">arturas.eidukas@ons.gov.uk</a></p>
+						<p>@finnkauski</p>
+					</div>
+					<aside class="notes">
+						Introduce yourself a bit.
+						Explain name origins and typed transformer names
+					</aside>
+				</section>
+
+			<section>
+				<h3>Content</h3>
+				<ul>
+					<li>The Problem</li>
+					<li>The Data</li>
+					<li>The Goal</li>
+					<li>Natural Language Processing</li>
+					<li>Pipeline overview</li>
+					<li>Word embeddings</li>
+					<li>Grouping items together</li>
+					<li>Generating group labels</li>
+					<li>Post-processing</li>
+					<li>Mapping to existing taxonomies</li>
+					<li>Current limitations</li>
+					<li>Conclusions</li>
+				</ul>
+				<aside class="notes">
+					First guide you through the problem,
+					what data we had when we wanted to solve it
+					and the final goal of what were trying to
+					achieve.
+				</aside>
+			</section>
+
+			<section>
+
+				<section>
+					<h3>The Problem from our perspective</h3>
+					<ol>
+						<li>There are vast amounts of unstructured data that are underutilised</li>
+						<li>How can we make better use of this data?</li>
+						<li><b>Can we intelligently group this unstructured data and produce sensible labels?</b></li>
+					</ol>
+					<aside class="notes">
+					</aside>
+				</section>
+
+			</section>
+
+			<section>
+				<section>
+					<h3>The Data</h3>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<h3>Data Issues</h3>
+					<ul>
+						<li>Spelling mistakes</li>
+						<li>Special characters</li>
+						<li>Abbreviations & codes</li>
+						<li>Obscure entries</li>
+						<li>Inconsistencies in recording formats</li>
+						<li>The range in level of detail</li>
+					</ul>
+					<aside class="notes">
+						Oh boy did it have some
+					</aside>
+				</section>
+				<section>
+					<img src="img/data_pic.png"
+							 style="border: 0px;
+											background: rgba(0,0,0,0);
+											box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+					<aside class="notes">
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h3>The Goal</h3>
+					<p>A hierarchical structure that would automatically asign labels for each tier based on the data</p>
+					<aside class="notes">
+						What is it that we are trying to achieve.
+					</aside>
+				</section>
+				<section data-background-iframe='./d3/circle.html'>
+					<aside class="notes">
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h3>Natural Language Processing</h3>
+					<h4>(NLP)</h4>
+					<aside class="notes">
+						Some ideas here come from the talk by
+						Sebastian Dziadzio
+						@sebadzia
+						Watch his pyData talk on NLP
+					</aside>
+				</section>
+				<section>
+					<h4>What is it?</h4>
+					<p>A set of techniques and tools to turn the language we speak,
+						write or sign into machine interpretable representations.</p>
+					<div class="fragment fade-in">
+						<p><b>Well is it going from:</b> <br> 'Malcolm Tucker is my favorite TV series character.'</p>
+						<p><b>To:</b></p>
+						<blockquote cite="http://">
+							01001101 01100001 01101100 01100011 01101111 01101100 01101101 00100000 01010100 01110101 01100011 01101011 01100101 01110010 00100000 01101001 01110011 00100000 01101101 01111001 00100000 01100110 01100001 01110110 01101111 01110010 01101001 01110100 01100101 00100000 01010100 01010110 00100000 01110011 01100101 01110010 01101001 01100101 01110011 00100000 01100011 01101000 01100001 01110010 01100001 01100011 01110100 01100101 01110010 00101110
+						</blockquote>
+					</div>
+					<aside class="notes">
+						Not quite. This will let the computer read the letters,
+						but will not convey any information about the meaning, grammar or
+						structure of the text.<br><br>
+						We are trying to preserve much more information and convey
+						it to the computer in a more meaningful way for analysis.
+					</aside>
+				</section>
+				<section>
+					<h3>Why is it hard?</h3>
+					<ol>
+						<li>Language is a product of evolution.</li>
+						<ul>
+							<li>e-liquid</li>
+							<li>mansplain</li>
+							<li>ransomware</li>
+							<li>deglobalization</li>
+							<li>hangry</li>
+						</ul>
+						<li>Massive issues surrounding syntactic, phonetic and semantic ambiguity</li>
+						<ul>
+							<li>"Time flies like an arrow."</li>
+							<li>"Fruit flies like a banana."</li>
+						</ul>
+					</ol>
+					<aside class="notes">
+						The list there is a sample of the the Oxford dictionary
+						new word list for 2018. <br><br>
+						With regards to point 2 we can really see from the data I've shown before
+						that its not always clear what is what. To give you a more 'well behaved'
+						example of ambiguity here are two sentences with the same words meaning
+						different things.
+					</aside>
+				</section>
+				<section>
+					<p>The tools and techniques used for the purposes of solving these issues are
+					are numerous.</p>
+					<p>It is a <b>very</b> vast field.</p>
+					<aside class="notes">
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h3><b>So how do we then represent language?</b></h3>
+					<aside class="notes">
+						Well I'll try to give a very brief overview. But
+						if someone wants more info come up and ask. Bring a
+						pen and paper.
+					</aside>
+				</section>
+				<section>
+					<p>
+						The goal is to have a set of real numbers for each
+						word/sentence/book that represent that text within
+						numerically based on some sort of properties of the
+						text.
+					</p>
+					<small class='fragment fade-in'>Disclaimer: that is a very vague definition by me. But I hope it makes sense.</small>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<table>
+						<tr>
+							<th>type of representation</th>
+							<th>representation</th>
+						</tr>
+						<tr>
+							<td>one hot encoding</td>
+							<td>{w<sub>1</sub>:1, w<sub>2</sub>:1, w<sub>3</sub>:1, w<sub>4</sub>:0, ... w<sub>n</sub>:1}</td>
+						</tr>
+						<tr>
+							<td>count vectorisation</td>
+							<td>{w<sub>1</sub>:2, w<sub>2</sub>:1, w<sub>3</sub>:2, w<sub>4</sub>:0, ... w<sub>n</sub>:1}</td>
+						</tr>
+						<tr>
+							<td>term frequency inverse document frequencey</td>
+							<td>{w<sub>1</sub>:0.03, w<sub>2</sub>:0.23, w<sub>3</sub>:0.76, w<sub>4</sub>:0, ... w<sub>n</sub>:0.4}</td>
+						</tr>
+						<tr>
+							<td>word2vec/fastText</td>
+							<td>{n<sub>1</sub>:0.12, n<sub>2</sub>:0.52,...,n<sub>300</sub>:0.003,}</td>
+						</tr>
+					</table>
+					<aside class="notes">
+						ohe: pretty simplistic <br>
+						count: well lets say we keep track what word number relates to what word,
+						and then count how many of these appear in the bit of text? <br>
+						tfidf: point out the relationship between count and tfidf
+						word2vec: well this is too hard to explain in this amount of time.
+					</aside>
+				</section>
+				<section>
+					<h3>Word2Vec</h3>
+					<img src="http://mccormickml.com/assets/word2vec/training_data.png"
+							 style="border: 0px;
+											background: rgba(0,0,0,0);
+											box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+					<aside class="notes">
+						This is the general ideal. You train a model to be
+						able to predict other words around it. And u use
+						some of the parameters of the model as your 300 dim vector.
+					</aside>
+				</section>
+				<section>
+					<h3>Word2Vec</h3>
+					<p>Imagine if I had only 2 numbers. I could then plot them!</p>
+					<img src="https://samyzaf.com/ML/nlp/word2vec2.png"
+							 style="height:auto;
+							 				width:80%;
+							 				border: 0px;
+											background: rgba(0,0,0,0);
+											box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+
+					<small>A very simplistic explanation of fastText is that it is just an extention of this that deals with words
+					it has never seen before and can handle misspellings etc. </small>
+					<aside class="notes">
+						explain arrows and note down that although having these relationships
+						is useful for all sorts of fun stuff, we didn't use them, we just needed
+						to be able to 'plot' and put things into contextual space.
+					</aside>
+				</section>
+				<section>
+					<h3>Our results with a similar model</h3>
+					<ul>
+						<li>The model was trained on the entire English Wikipedia.</li>
+						<li>Although it sounds fun we didn't do it, we got a pre-trained model</li>
+						<li>We might want to explore a more suitable textual corpus and train our own in the future.</li>
+					</ul>
+				</section>
+				<section>
+					<iframe src="bokeh_full.html"
+								  width='100%'
+									height='1000px'
+									style="display:block; margin:auto;"></iframe>
+					<aside class="notes">
+						here are our results for a similar model.
+						feel free to zoom around, bottom left you'll find cars.
+					</aside>
+				</section>
+			</section>
+
+			<section>
+				<section>
+					<h3>How do we get the correct bubbles/clusters and labels?</h3>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<p>Now that we have embedded the items in space, we can proceed to use clustering
+					techniques.</p>
+					<p class='fragment fade-in'>Simply put, we can use algorithms that will find
+					clusters in the space and then assign all items within the cluster to a 'bucket'</p>
+				</section>
+				<section>
+					<p>We use heirarchical clustering which produces something like this:</p>
+					<img src="https://samyzaf.com/ML/nlp/word2vec2.png"
+							 style="height:auto;
+											width:80%;
+											border: 0px;
+											background: rgba(0,0,0,0);
+											box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+
+				</section>
+			</section>
+
+
+			<section>
+				<aside class="notes">
+				</aside>
+			</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				center:true,
+				controlsTutorial: false,
+				controlsLayout: "bottom-right",
+				transition: "slide",
+				transitionSpeed: "fast",
+				dependencies: [{
+						src: 'plugin/markdown/marked.js'
+					},
+					{
+						src: 'plugin/markdown/markdown.js'
+					},
+					{
+						src: 'plugin/notes/notes.js',
+						async: true
+					},
+					{ src: 'plugin/typed/typed.js',
+					 	async: false,
+						callback: function() { callTypedJs(); }
+					},
+					{
+						src: 'plugin/highlight/highlight.js',
+						async: true,
+						callback: function() {
+							hljs.initHighlightingOnLoad();
+						}
+					},
+					{ src: 'plugin/reveald3.js' }
+				]
+			});
+		</script>
+	</body>
+</html>
