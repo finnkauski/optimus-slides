@@ -23,6 +23,9 @@
 			sub {
 				font-size: 0.6em !important;
 			}
+			.inactive {
+				color: #DCDCDC;
+			}
 		</style>
 
 		<!-- Printing and PDF exports -->
@@ -59,30 +62,6 @@
 						Explain name origins and typed transformer names
 					</aside>
 				</section>
-
-			<section>
-				<h3>Content</h3>
-				<ul>
-					<li>The Problem</li>
-					<li>The Data</li>
-					<li>The Goal</li>
-					<li>Natural Language Processing</li>
-					<li>Pipeline overview</li>
-					<li>Word embeddings</li>
-					<li>Grouping items together</li>
-					<li>Generating group labels</li>
-					<li>Post-processing</li>
-					<li>Mapping to existing taxonomies</li>
-					<li>Current limitations</li>
-					<li>Conclusions</li>
-				</ul>
-				<aside class="notes">
-					First guide you through the problem,
-					what data we had when we wanted to solve it
-					and the final goal of what were trying to
-					achieve.
-				</aside>
-			</section>
 
 			<section>
 
@@ -162,7 +141,7 @@
 						<p><b>Well is it going from:</b> <br> 'Malcolm Tucker is my favorite TV series character.'</p>
 						<p><b>To:</b></p>
 						<blockquote cite="http://">
-							01001101 01100001 01101100 01100011 01101111 01101100 01101101 00100000 01010100 01110101 01100011 01101011 01100101 01110010 00100000 01101001 01110011 00100000 01101101 01111001 00100000 01100110 01100001 01110110 01101111 01110010 01101001 01110100 01100101 00100000 01010100 01010110 00100000 01110011 01100101 01110010 01101001 01100101 01110011 00100000 01100011 01101000 01100001 01110010 01100001 01100011 01110100 01100101 01110010 00101110
+							<small>01001101 01100001 01101100 01100011 01101111 01101100 01101101 00100000 01010100 01110101 01100011 01101011 01100101 01110010 00100000 01101001 01110011 00100000 01101101 01111001 00100000 01100110 01100001 01110110 01101111 01110010 01101001 01110100 01100101 00100000 01010100 01010110 00100000 01110011 01100101 01110010 01101001 01100101 01110011 00100000 01100011 01101000 01100001 01110010 01100001 01100011 01110100 01100101 01110010 00101110</small>
 						</blockquote>
 					</div>
 					<aside class="notes">
@@ -236,19 +215,19 @@
 						</tr>
 						<tr>
 							<td>one hot encoding</td>
-							<td>{w<sub>1</sub>:1, w<sub>2</sub>:1, w<sub>3</sub>:1, w<sub>4</sub>:0, ... w<sub>n</sub>:1}</td>
+							<td>{<span class='inactive'>w<sub>1</sub></span>:1,<span class='inactive'>w<sub>2</sub></span>:1,<span class='inactive'>w<sub>3</sub></span>:1,<span class='inactive'>w<sub>4</sub></span>:0,...<span class='inactive'>w<sub>n</sub></span>:1}</td>
 						</tr>
 						<tr>
 							<td>count vectorisation</td>
-							<td>{w<sub>1</sub>:2, w<sub>2</sub>:1, w<sub>3</sub>:2, w<sub>4</sub>:0, ... w<sub>n</sub>:1}</td>
+							<td>{<span class='inactive'>w<sub>1</sub></span>:2,<span class='inactive'>w<sub>2</sub></span>:1,<span class='inactive'>w<sub>3</sub></span>:2,<span class='inactive'>w<sub>4</sub></span>:0,...<span class='inactive'>w<sub>n</sub></span>:1}</td>
 						</tr>
 						<tr>
 							<td>term frequency inverse document frequencey</td>
-							<td>{w<sub>1</sub>:0.03, w<sub>2</sub>:0.23, w<sub>3</sub>:0.76, w<sub>4</sub>:0, ... w<sub>n</sub>:0.4}</td>
+							<td>{<span class='inactive'>w<sub>1</sub></span>:0.03,<span class='inactive'>w<sub>2</sub></span>:0.23,<span class='inactive'>w<sub>3</sub></span>:0.76,<span class='inactive'>w<sub>4</sub></span>:0,...<span class='inactive'>w<sub>n</sub></span>:0.4}</td>
 						</tr>
 						<tr>
 							<td>word2vec/fastText</td>
-							<td>{n<sub>1</sub>:0.12, n<sub>2</sub>:0.52,...,n<sub>300</sub>:0.003,}</td>
+							<td>{<span class='inactive'>n<sub>1</sub></span>:0.12,<span class='inactive'>n<sub>2</sub></span>:0.52,...,<span class='inactive'>n<sub>300</sub></span>:0.003,}</td>
 						</tr>
 					</table>
 					<aside class="notes">
@@ -323,24 +302,215 @@
 				</section>
 				<section>
 					<p>We use heirarchical clustering which produces something like this:</p>
-					<img src="https://samyzaf.com/ML/nlp/word2vec2.png"
+					<img src="./img/hclust.png"
+							 style="height:70%;
+									width:auto;
+									border: 0px;
+									background: rgba(0,0,0,0);
+									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+
+				</section>
+				<section>
+					<img src="./img/hc.png"
 							 style="height:auto;
-											width:80%;
-											border: 0px;
-											background: rgba(0,0,0,0);
-											box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+									width:50%;
+									border: 0px;
+									background: rgba(0,0,0,0);
+									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+
+				</section>
+				<section>
+					<img src="./img/hclust-small.png"
+							 style="height:auto;
+									width:50%;
+									border: 0px;
+									background: rgba(0,0,0,0);
+									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
 
 				</section>
 			</section>
-
-
 			<section>
-				<aside class="notes">
-				</aside>
+				<section>
+					<h3>We got the clusters<br>Now what?</h3>
+					<aside class="notes">
+						Well, we're here now what do we do.
+						We've made a cut of the tree, we have what we think
+						are homogenous branches and leaves.Can we give a name
+						to them automatically?
+					</aside>
+				</section>
+				<section>
+					<p>Given we have a basket of text items, we now take each of these baskets
+					and push it through a little pipeline that will try to find a nice (or at least usable)
+					label for the basket.</p>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<p><strong>1. Edit distance</strong></p>
+					<img src="http://richardminerich.com/wp-content/uploads/2012/09/Levenshtein.png"
+							 style="height:auto;
+									width:50%;
+									border: 0px;
+									background: rgba(0,0,0,0);
+									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<p><strong>2. Word Grams</strong></p>
+					<img src="https://cdn-images-1.medium.com/max/1200/1*yiH5sZI-IBxDSQMKhvbcHw.png"
+							 style="height:auto;
+									width:70%;
+									border: 0px;
+									background: rgba(0,0,0,0);
+									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<p><strong>3. Char Grams</strong></p>
+					<p>Our basket:</p>
+					<ul>
+						<li>chron<strong>ology</strong></li>
+						<li>bi<strong>ology</strong></li>
+						<li>top<strong>ology</strong></li>
+						<li>crimin<strong>ology</strong></li>
+						<li>ide<strong>ology</strong></li>
+					</ul>
+					<p>Will get labeled to: "ology"</p>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<p><strong>4. Wordnet</strong></p>
+					<img src="https://csdl-images.computer.org/trans/tk/2017/01/figures/zhu2-2610428.gif"
+							 style="height:auto;
+									width:60%;
+									border: 0px;
+									background: rgba(0,0,0,0);
+									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<p>These methods are done in sequence and whichever one gets a label first that method
+					will be applied.</p>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<p>This is what we get:</p>
+					<img src="./img/data example.png"
+							 style="height:auto;
+									width:70%;
+									border: 0px;
+									background: rgba(0,0,0,0);
+									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+					<aside class="notes">
+						We can see the lineage of the label through each iteration.
+					</aside>
+				</section>
 			</section>
-
-			</div>
+			<section>
+				<section>
+					<h3>Summary of pipeline</h3>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<img src="./img/Pipeline_highlevel.png"
+							 style="height:auto;
+									width:75%;
+									border: 0px;
+									background: rgba(0,0,0,0);
+									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+					<aside class="notes">
+					</aside>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>Post-processing</h3>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<p>So now we have some predicted labels for the data we had,
+					but they sometimes (often) come out nonsensical. However, the
+					groupings of original items that fall under these labels, still
+					make sense.</p>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<p>For example, you might have a final label as `frozen`, but all
+					the items within it could be food items.</p>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<p>This allows us to classify these labels into food all in one go,
+					by correcting the predicted label. The question is how do we facilitate that.</p>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<img src="./img/app1.png"
+							 style="height:auto;
+									width:100%;
+									border: 0px;
+									background: rgba(0,0,0,0);
+									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<img src="./img/app2.png"
+							 style="height:auto;
+									width:100%;
+									border: 0px;
+									background: rgba(0,0,0,0);
+									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<img src="./img/app3.png"
+							 style="height:auto;
+									width:100%;
+									border: 0px;
+									background: rgba(0,0,0,0);
+									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+					<aside class="notes">
+					</aside>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h3>So what next?</h3>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<p>Well, the idea is to make a dataset that makes optimus useless!</p>
+					<p>Unstructured & unlabeled --> Structured & labeled</p>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<p>We want to go straight from the text, to a defined classification.</p>
+					<p>By having nicely labeled data we are able to build classifiers.</p>
+					<small><strong><p>Raw data -> Premade categories (HS, COICOP or any other classification)</p></strong></small>
+					<aside class="notes">
+					</aside>
+				</section>
+			</section>
+			<section>
+				<h3>Next...</h3>
+			</section>
 		</div>
+	</div>
 
 		<script src="lib/js/head.min.js"></script>
 		<script src="js/reveal.js"></script>
