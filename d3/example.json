@@ -22,10 +22,19 @@
        "children":[
          {"name":"X5", "size":5000},
          {"name":"bmw","size":2034},
-         {"name":"volvo","size":12034}
+          {"name":"volvo",
+           "children":[
+              {"name":"iveco", "size":123},
+              {"name":"volvo chasis", "size":1260}
+           ]}
        ]
       },
-      {"name": "Packaging", "size": 6714},
+      {"name": "Packaging", 
+         "children":[
+            {"name":"food packaging", "size":1250},
+            {"name":"pacakging", "size":2020},
+            {"name":"stell and packaging", "size":210}
+         ]},
       {"name": "Chemicals", "size": 743}
      ]
 }
