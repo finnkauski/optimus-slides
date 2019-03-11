@@ -66,13 +66,14 @@
 			<section>
 
 				<section>
-					<h3>The Problem from our perspective</h3>
+					<h3><u>The Problem</u></h3>
 					<ol>
 						<li>There are vast amounts of unstructured data that are underutilised</li>
 						<li>How can we make better use of this data?</li>
 						<li><b>Can we intelligently group this unstructured data and produce sensible labels?</b></li>
 					</ol>
 					<aside class="notes">
+						Agnostic of all stakeholders for this presentation
 					</aside>
 				</section>
 
@@ -80,7 +81,7 @@
 
 			<section>
 				<section>
-					<h3>The Data</h3>
+					<h3><u>The Data</u></h3>
 					<aside class="notes">
 					</aside>
 				</section>
@@ -110,7 +111,7 @@
 
 			<section>
 				<section>
-					<h3>The Goal</h3>
+					<h3><u>The Goal</u></h3>
 					<p>A hierarchical structure that would automatically asign labels for each tier based on the data</p>
 					<aside class="notes">
 						What is it that we are trying to achieve.
@@ -124,7 +125,8 @@
 
 			<section>
 				<section>
-					<h3>Natural Language Processing</h3>
+					<h3><u>The how</u></h3>
+					<h2>Natural Language Processing</h2>
 					<h4>(NLP)</h4>
 					<aside class="notes">
 						Some ideas here come from the talk by
@@ -137,13 +139,7 @@
 					<h4>What is it?</h4>
 					<p>A set of techniques and tools to turn the language we speak,
 						write or sign into machine interpretable representations.</p>
-					<div class="fragment fade-in">
-						<p><b>Well is it going from:</b> <br> 'Malcolm Tucker is my favorite TV series character.'</p>
-						<p><b>To:</b></p>
-						<blockquote cite="http://">
-							<small>01001101 01100001 01101100 01100011 01101111 01101100 01101101 00100000 01010100 01110101 01100011 01101011 01100101 01110010 00100000 01101001 01110011 00100000 01101101 01111001 00100000 01100110 01100001 01110110 01101111 01110010 01101001 01110100 01100101 00100000 01010100 01010110 00100000 01110011 01100101 01110010 01101001 01100101 01110011 00100000 01100011 01101000 01100001 01110010 01100001 01100011 01110100 01100101 01110010 00101110</small>
-						</blockquote>
-					</div>
+					<p>In other words: Text -> Numbers</p>
 					<aside class="notes">
 						Not quite. This will let the computer read the letters,
 						but will not convey any information about the meaning, grammar or
@@ -153,7 +149,7 @@
 					</aside>
 				</section>
 				<section>
-					<h3>Why is it hard?</h3>
+					<h3>It is hard to get the `right` numbers</h3>
 					<ol>
 						<li>Language is a product of evolution.</li>
 						<ul>
@@ -168,6 +164,7 @@
 							<li>"Time flies like an arrow."</li>
 							<li>"Fruit flies like a banana."</li>
 						</ul>
+						<li>And all the lovely issues that we had in the `Data` section (abbreviations etc.)</li>
 					</ol>
 					<aside class="notes">
 						The list there is a sample of the the Oxford dictionary
@@ -197,86 +194,11 @@
 					</aside>
 				</section>
 				<section>
-					<p>
-						The goal is to have a set of real numbers for each
-						word/sentence/book that represent that text
-						numerically based on some sort of properties of the
-						text.</p>
-					<p>
-						We are <strong>not</strong> trying to tell the
-						computer what letters we are typing. It already knows.
-					</p>
-					<small class='fragment fade-in'>Disclaimer: that is a very vague definition by me. But I hope it makes sense.</small>
-					<aside class="notes">
-					</aside>
-				</section>
-				<section>
-					<table>
-						<tr>
-							<th>type of representation</th>
-							<th>representation</th>
-						</tr>
-						<tr>
-							<td>one hot encoding</td>
-							<td>{<span class='inactive'>w<sub>1</sub></span>:1,<span class='inactive'>w<sub>2</sub></span>:1,<span class='inactive'>w<sub>3</sub></span>:1,<span class='inactive'>w<sub>4</sub></span>:0,...<span class='inactive'>w<sub>n</sub></span>:1}</td>
-						</tr>
-						<tr>
-							<td>count vectorisation</td>
-							<td>{<span class='inactive'>w<sub>1</sub></span>:2,<span class='inactive'>w<sub>2</sub></span>:1,<span class='inactive'>w<sub>3</sub></span>:2,<span class='inactive'>w<sub>4</sub></span>:0,...<span class='inactive'>w<sub>n</sub></span>:1}</td>
-						</tr>
-						<tr>
-							<td>term frequency inverse document frequencey</td>
-							<td>{<span class='inactive'>w<sub>1</sub></span>:0.03,<span class='inactive'>w<sub>2</sub></span>:0.23,<span class='inactive'>w<sub>3</sub></span>:0.76,<span class='inactive'>w<sub>4</sub></span>:0,...<span class='inactive'>w<sub>n</sub></span>:0.4}</td>
-						</tr>
-						<tr>
-							<td>word2vec/fastText</td>
-							<td>{<span class='inactive'>n<sub>1</sub></span>:0.12,<span class='inactive'>n<sub>2</sub></span>:0.52,...,<span class='inactive'>n<sub>300</sub></span>:0.003,}</td>
-						</tr>
-					</table>
-					<aside class="notes">
-						ohe: pretty simplistic <br>
-						count: well lets say we keep track what word number relates to what word,
-						and then count how many of these appear in the bit of text? <br>
-						tfidf: point out the relationship between count and tfidf
-						word2vec: well this is too hard to explain in this amount of time.
-					</aside>
-				</section>
-				<section>
-					<h3>Word2Vec</h3>
-					<img src="http://mccormickml.com/assets/word2vec/training_data.png"
-							 style="border: 0px;
-											background: rgba(0,0,0,0);
-											box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
-					<aside class="notes">
-						This is the general ideal. You train a model to be
-						able to predict other words around it. And u use
-						some of the parameters of the model as your 300 dim vector.
-					</aside>
-				</section>
-				<section>
-					<h3>Word2Vec</h3>
-					<p>Imagine if I had only 2 numbers. I could then plot them!</p>
-					<img src="https://samyzaf.com/ML/nlp/word2vec2.png"
-							 style="height:auto;
-							 				width:80%;
-							 				border: 0px;
-											background: rgba(0,0,0,0);
-											box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
-
-					<small>A very simplistic explanation of fastText is that it is just an extention of this that deals with words
-					it has never seen before and can handle misspellings etc. </small>
-					<aside class="notes">
-						explain arrows and note down that although having these relationships
-						is useful for all sorts of fun stuff, we didn't use them, we just needed
-						to be able to 'plot' and put things into contextual space.
-					</aside>
-				</section>
-				<section>
-					<h3>Our results with a similar model</h3>
+					<h3>Our results</h3>
 					<ul>
-						<li>The model was trained on the entire English Wikipedia.</li>
+						<li>The model was trained on the entire English Wikipedia and a ton of webpages.</li>
 						<li>Although it sounds fun we didn't do it, we got a pre-trained model</li>
-						<li>We might want to explore a more suitable textual corpus and train our own in the future.</li>
+						<li>Was able to deal with the mispellings in a fairly clever way</li>
 					</ul>
 				</section>
 				<section>
@@ -307,48 +229,17 @@
 
 			<section>
 				<section>
-					<h3>How do we get the correct bubbles/clusters and labels?</h3>
+					<h3>We then cluster our numbers!</h3>
+					<p>(hierarchical clustering)</p>
 					<aside class="notes">
 					</aside>
 				</section>
-				<section>
-					<p>Now that we have embedded the items in space, we can proceed to use clustering
-					techniques.</p>
-					<p class='fragment fade-in'>Simply put, we can use algorithms that will find
-					clusters in the space and then assign all items within the cluster to a 'bucket'</p>
-				</section>
-				<section>
-					<p>We use heirarchical clustering which produces something like this:</p>
-					<img src="./img/hclust.png"
-							 style="height:70%;
-									width:auto;
-									border: 0px;
-									background: rgba(0,0,0,0);
-									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
-
-				</section>
-				<section>
-					<img src="./img/hc.png"
-							 style="height:auto;
-									width:50%;
-									border: 0px;
-									background: rgba(0,0,0,0);
-									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
-
-				</section>
-				<section>
-					<img src="./img/hclust-small.png"
-							 style="height:auto;
-									width:50%;
-									border: 0px;
-									background: rgba(0,0,0,0);
-									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
-
-				</section>
 			</section>
+
 			<section>
 				<section>
-					<h3>We got the clusters<br>Now what?</h3>
+					<h3>We got out clusters, now what?</h3>
+					<h2><u>The Labelling</u></h2>
 					<aside class="notes">
 						Well, we're here now what do we do.
 						We've made a cut of the tree, we have what we think
@@ -356,10 +247,10 @@
 						to them automatically?
 					</aside>
 				</section>
+
 				<section>
-					<p>Given we have a basket of text items, we now take each of these baskets
-					and push it through a little pipeline that will try to find a nice (or at least usable)
-					label for the basket.</p>
+					<p>Each cluster is then send through a `selection` process that selects and appropriate
+					label for the cluster if it can!</p>
 					<aside class="notes">
 					</aside>
 				</section>
@@ -376,12 +267,7 @@
 				</section>
 				<section>
 					<p><strong>2. Word Grams</strong></p>
-					<img src="https://cdn-images-1.medium.com/max/1200/1*yiH5sZI-IBxDSQMKhvbcHw.png"
-							 style="height:auto;
-									width:70%;
-									border: 0px;
-									background: rgba(0,0,0,0);
-									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
+					<p>Does a combination of words appear often across the clusters?</p>
 					<aside class="notes">
 					</aside>
 				</section>
@@ -419,7 +305,7 @@
 			</section>
 			<section>
 				<section>
-					<h3>Summary of pipeline</h3>
+					<h3><u>The Pipeline</u></h3>
 					<aside class="notes">
 					</aside>
 				</section>
@@ -446,86 +332,9 @@
 					</aside>
 				</section>
 			</section>
+			<section data-background-image="img/theend.gif">
+
 			<section>
-				<section>
-					<h3>Post-processing</h3>
-					<aside class="notes">
-					</aside>
-				</section>
-				<section>
-					<p>So now we have some predicted labels for the data we had,
-					but they sometimes (often) come out nonsensical. However, the
-					groupings of original items that fall under these labels, still
-					make sense.</p>
-					<aside class="notes">
-					</aside>
-				</section>
-				<section>
-					<p>For example, you might have a final label as `frozen`, but all
-					the items within it could be food items.</p>
-					<aside class="notes">
-					</aside>
-				</section>
-				<section>
-					<p>This allows us to classify these labels into food all in one go,
-					by correcting the predicted label. The question is how do we facilitate that.</p>
-					<aside class="notes">
-					</aside>
-				</section>
-				<section>
-					<img src="./img/app1.png"
-							 style="height:auto;
-									width:100%;
-									border: 0px;
-									background: rgba(0,0,0,0);
-									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
-					<aside class="notes">
-					</aside>
-				</section>
-				<section>
-					<img src="./img/app2.png"
-							 style="height:auto;
-									width:100%;
-									border: 0px;
-									background: rgba(0,0,0,0);
-									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
-					<aside class="notes">
-					</aside>
-				</section>
-				<section>
-					<img src="./img/app3.png"
-							 style="height:auto;
-									width:100%;
-									border: 0px;
-									background: rgba(0,0,0,0);
-									box-shadow: 0 0 0px rgba(0, 0, 0, 0)">
-					<aside class="notes">
-					</aside>
-				</section>
-			</section>
-			<section>
-				<section>
-					<h3>So what next?</h3>
-					<aside class="notes">
-					</aside>
-				</section>
-				<section>
-					<p>Well, the idea is to make a dataset that makes optimus useless!</p>
-					<p>Unstructured & unlabeled --> Structured & labeled</p>
-					<aside class="notes">
-					</aside>
-				</section>
-				<section>
-					<p>We want to go straight from the text, to a defined classification.</p>
-					<p>By having nicely labeled data we are able to build classifiers.</p>
-					<small><strong><p>Raw data -> Premade categories (HS, COICOP or any other classification)</p></strong></small>
-					<aside class="notes">
-					</aside>
-				</section>
-			</section>
-			<section>
-				<h3>Next...</h3>
-			</section>
 		</div>
 	</div>
 
