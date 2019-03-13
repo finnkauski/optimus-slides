@@ -139,33 +139,35 @@
 					<h4>What is it?</h4>
 					<p>A set of techniques and tools to turn the language we speak,
 						write or sign into machine interpretable representations.</p>
-					<p>In other words: Text -> Numbers</p>
+					<p>We want dense vectors of continious values which encode some information about the text</p>
 					<aside class="notes">
-						Not quite. This will let the computer read the letters,
-						but will not convey any information about the meaning, grammar or
-						structure of the text.<br><br>
-						We are trying to preserve much more information and convey
-						it to the computer in a more meaningful way for analysis.
 					</aside>
 				</section>
 				<section>
-					<h3>It is hard to get the `right` numbers</h3>
-					<ol>
-						<li>Language is a product of evolution.</li>
+					<h3>It's tricky</h3>
+					<p><small> - Run D.M.C.</small></p>
+					<ul>
+						<li>Language is a product of evolution:</li>
 						<ul>
 							<li>e-liquid</li>
 							<li>mansplain</li>
 							<li>ransomware</li>
 							<li>deglobalization</li>
 							<li>hangry</li>
-						</ul>
-						<li>Massive issues surrounding syntactic, phonetic and semantic ambiguity</li>
+							<li>hashtag</li>
+							<li>facepalm</li>
+						</ul><br>
+					</ul>
+				</section>
+				<section>
+					<ul>
+						<li>Syntactic, phonetic and semantic ambiguity:</li>
 						<ul>
 							<li>"Time flies like an arrow."</li>
 							<li>"Fruit flies like a banana."</li>
-						</ul>
+						</ul><br>
 						<li>And all the lovely issues that we had in the `Data` section (abbreviations etc.)</li>
-					</ol>
+					</ul>
 					<aside class="notes">
 						The list there is a sample of the the Oxford dictionary
 						new word list for 2018. <br><br>
@@ -175,18 +177,11 @@
 						different things.
 					</aside>
 				</section>
-				<section>
-					<p>The tools and techniques used for the purposes of solving these issues are
-					are numerous.</p>
-					<p>It is a <b>very</b> vast field.</p>
-					<aside class="notes">
-					</aside>
-				</section>
 			</section>
 
 			<section>
 				<section>
-					<h3><b>So how do we then represent language?</b></h3>
+					<h3><b>Embedding techniques</b></h3>
 					<aside class="notes">
 						Well I'll try to give a very brief overview. But
 						if someone wants more info come up and ask. Bring a
@@ -194,11 +189,30 @@
 					</aside>
 				</section>
 				<section>
-					<h3>Our results</h3>
+					<ul>
+					<p>A lot of modern NLP techniques rely on a massive corpus of text to learn
+						vector representations.</p>
+					<p>Often these representations try to encode windowed contextual relationships
+						present in the training corpus</p>
+					</ul>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<h3>So what did we use?</h3>
 					<ul>
 						<li>The model was trained on the entire English Wikipedia and a ton of webpages.</li>
 						<li>Although it sounds fun we didn't do it, we got a pre-trained model</li>
 						<li>Was able to deal with the mispellings in a fairly clever way</li>
+					</ul>
+					<br><br />
+					<small>If you want to know more, please come up and ask!</small>
+				</section>
+				<section>
+					<ul>
+						<li>Our vector representation for each text snippet were 300 dimensional</li>
+						<li>We started with around 3500 <b>unique</b> descriptions</li>
+						<li>The model did surprisingly well given its not trained on domain specific text</li>
 					</ul>
 				</section>
 				<section>
@@ -229,8 +243,16 @@
 
 			<section>
 				<section>
-					<h3>We then cluster our numbers!</h3>
-					<p>(hierarchical clustering)</p>
+					<h3>We then cluster our numbers</h3>
+					<aside class="notes">
+					</aside>
+				</section>
+				<section>
+					<ul>
+						<li><p>We use agglomerative hierarchical clustering using Ward-linkage</p></li>
+						<li><p>We cut the dendrogram at a certain depth to decide what our clusters are</p></li>
+						<li><p>The downstream process reclusters and each time expands this depth which builds the hierarchy (more on that later)</p></li>
+					</ul>
 					<aside class="notes">
 					</aside>
 				</section>
@@ -249,7 +271,7 @@
 				</section>
 
 				<section>
-					<p>Each cluster is then send through a `selection` process that selects and appropriate
+					<p>Each cluster is then send through a <b>selection</b> process that selects and appropriate
 					label for the cluster if it can!</p>
 					<aside class="notes">
 					</aside>
